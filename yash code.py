@@ -12,6 +12,22 @@ st.set_page_config(
     layout="centered",
     page_icon="📊"
 )
+# Upload and persist the file in session
+if "df" not in st.session_state:
+    uploaded_file = st.file_uploader("📁 Upload CSV file", type=["csv"])
+
+    if uploaded_file:
+        df = pd.read_csv(uploaded_file)
+        st.session_state.df = df
+        st.success("✅ Dataset loaded and saved for this session.")
+    else:
+        st.info("👆 Please upload your CSV file to get started.")
+        st.stop()
+else:
+    df = st.session_state.df
+if st.button("🔁 Reset Uploaded Dataset"):
+    st.session_state.pop("df", None)
+    st.experimental_rerun()
 
 # Header
 st.markdown("""
