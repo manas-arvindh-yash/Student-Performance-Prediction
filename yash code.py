@@ -14,8 +14,8 @@ import os
 
 # Display images in sidebar
 with st.sidebar:
-    st.image("logo.png", caption="My School Logo", use_column_width=True)
-    st.image("banner.jpg", caption="Student Insights", use_column_width=True)
+    st.image("boy asleep.jpg", caption="My School Logo", use_column_width=True)
+    st.image("grad.jpg", caption="Student Insights", use_column_width=True)
 
 # Load dataset (pre-uploaded)
 @st.cache_data
