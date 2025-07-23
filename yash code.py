@@ -28,7 +28,7 @@ def set_bg_from_local(image_file):
     )
 
 # Set background (call this early)
-set_bg_from_local("dps.jfif")
+set_bg_from_local("dps.webp")
 
 
 # Page config
