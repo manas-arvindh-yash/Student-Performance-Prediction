@@ -28,7 +28,7 @@ def set_bg_from_local(image_file):
     )
 
 # Set background (call this early)
-set_bg_from_local("grad.jpg")
+set_bg_from_local("dps.jfif")
 
 
 # Page config
