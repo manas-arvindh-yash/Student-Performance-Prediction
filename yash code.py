@@ -9,6 +9,13 @@ from sklearn.metrics import mean_squared_error, r2_score
 # Page config
 st.set_page_config(page_title="📊 Student Performance Predictor", layout="centered")
 st.title("🎓 Student Performance Predictor")
+from PIL import Image
+import os
+
+# Display images in sidebar
+with st.sidebar:
+    st.image("logo.png", caption="My School Logo", use_column_width=True)
+    st.image("banner.jpg", caption="Student Insights", use_column_width=True)
 
 # Load dataset (pre-uploaded)
 @st.cache_data
