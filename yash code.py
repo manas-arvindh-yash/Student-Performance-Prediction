@@ -5,17 +5,35 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
+import streamlit as st
+import base64
+
+# Inject full background image using base64
+def set_bg_from_local(image_file):
+    with open(image_file, "rb") as img:
+        encoded = base64.b64encode(img.read()).decode()
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("data:image/jpg;base64,{encoded}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+# Set background (call this early)
+set_bg_from_local("grad.jpg")
+
 
 # Page config
 st.set_page_config(page_title="📊 Student Performance Predictor", layout="centered")
 st.title("🎓 Student Performance Predictor")
-from PIL import Image
-import os
-
-# Display images in sidebar
-with st.sidebar:
-    st.image("boy asleep.jpg", caption="My School Logo", use_column_width=True)
-    st.image("grad.jpg", caption="Student Insights", use_column_width=True)
 
 # Load dataset (pre-uploaded)
 @st.cache_data
