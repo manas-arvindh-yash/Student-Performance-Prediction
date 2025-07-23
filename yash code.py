@@ -8,6 +8,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 # Page config
 st.set_page_config(page_title="📊 Student Performance Predictor", layout="centered")
+st.title("🎓 Student Performance Predictor")
 
 # Load dataset (pre-uploaded)
 @st.cache_data
