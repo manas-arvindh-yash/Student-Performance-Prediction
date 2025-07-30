@@ -38,6 +38,15 @@ def set_bg_and_text(image_file):
 
 set_bg_and_text("dps.webp")
 
+# Set widget label colors to black
+st.markdown("""
+    <style>
+    label, .stTextInput label, .stSelectbox label, .stNumberInput label, .stSlider label, .stRadio label {
+        color: #000000 !important;
+        font-weight: 600;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # Inject full background image using base64
 def set_bg_from_local(image_file):
