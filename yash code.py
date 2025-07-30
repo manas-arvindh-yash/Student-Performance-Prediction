@@ -7,6 +7,37 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 import streamlit as st
 import base64
+import streamlit as st
+import base64
+
+# Set background and black font color
+def set_bg_and_text(image_file):
+    with open(image_file, "rb") as img:
+        encoded = base64.b64encode(img.read()).decode()
+    st.markdown(f"""
+        <style>
+        .stApp {{
+            background-image: url("data:image/jpg;base64,{encoded}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #000000;
+        }}
+        h1, h2, h3, h4, h5, h6 {{
+            color: #000000;
+        }}
+        .stMarkdown p {{
+            color: #000000;
+        }}
+        .css-1d391kg, .css-1cpxqw2 {{
+            color: #000000 !important;
+        }}
+        </style>
+    """, unsafe_allow_html=True)
+
+set_bg_and_text("background.jpg")
+
 
 # Inject full background image using base64
 def set_bg_from_local(image_file):
