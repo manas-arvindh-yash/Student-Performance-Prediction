@@ -36,7 +36,7 @@ def set_bg_and_text(image_file):
         </style>
     """, unsafe_allow_html=True)
 
-set_bg_and_text("background.jpg")
+set_bg_and_text("dps.webp")
 
 
 # Inject full background image using base64
