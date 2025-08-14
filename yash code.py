@@ -88,7 +88,7 @@ required_columns = [
     'Gender', 'Age', 'Department', 'Attendance (%)',
     'Midterm_Score', 'Final_Score', 'Assignments_Avg',
     'Projects_Score', 'Study_Hours_per_Week',
-    'Extracurricular_Activities',
+    'Extracurricular_Activities','Quizzes_Avg',
     'Internet_Access_at_Home', 'Parent_Education_Level',
     'Family_Income_Level', 'Stress_Level (1-10)',
     'Sleep_Hours_per_Night', 'Total_Score'
@@ -163,4 +163,5 @@ st.markdown("""
 <hr style='border: 1px solid #ccc'>
 <p style='text-align: center; color: #999;'>Built with ❤️ using Streamlit</p>
 """, unsafe_allow_html=True)
+
 
