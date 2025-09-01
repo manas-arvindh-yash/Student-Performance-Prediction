@@ -10,7 +10,7 @@ import base64
 import streamlit as st
 import base64
 
-# Set background and black font color
+
 def set_bg_and_text(image_file):
     with open(image_file, "rb") as img:
         encoded = base64.b64encode(img.read()).decode()
@@ -38,7 +38,7 @@ def set_bg_and_text(image_file):
 
 set_bg_and_text("dps.webp")
 
-# Set widget label colors to black
+
 st.markdown("""
     <style>
     label, .stTextInput label, .stSelectbox label, .stNumberInput label, .stSlider label, .stRadio label {
@@ -163,5 +163,6 @@ st.markdown("""
 <hr style='border: 1px solid #ccc'>
 <p style='text-align: center; color: #999;'>Built with ❤️ using Streamlit</p>
 """, unsafe_allow_html=True)
+
 
 
