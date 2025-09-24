@@ -1,4 +1,4 @@
-import streamlit as st
+
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
@@ -11,73 +11,7 @@ import streamlit as st
 import base64
 
 
-def set_bg_and_text(image_file):
-    with open(image_file, "rb") as img:
-        encoded = base64.b64encode(img.read()).decode()
-    st.markdown(f"""
-        <style>
-        .stApp {{
-            background-image: url("data:image/jpg;base64,{encoded}");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #000000;
-        }}
-        h1, h2, h3, h4, h5, h6 {{
-            color: #000000;
-        }}
-        .stMarkdown p {{
-            color: #000000;
-        }}
-        .css-1d391kg, .css-1cpxqw2 {{
-            color: #000000 !important;
-        }}
-        </style>
-    """, unsafe_allow_html=True)
 
-set_bg_and_text("dps.webp")
-
-
-st.markdown("""
-    <style>
-    label, .stTextInput label, .stSelectbox label, .stNumberInput label, .stSlider label, .stRadio label {
-        color: #000000 !important;
-        font-weight: 600;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# Inject full background image using base64
-def set_bg_from_local(image_file):
-    with open(image_file, "rb") as img:
-        encoded = base64.b64encode(img.read()).decode()
-    st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-image: url("data:image/jpg;base64,{encoded}");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-# Set background (call this early)
-set_bg_from_local("dps.webp")
-
-
-# Page config
-st.set_page_config(page_title="📊 Student Performance Predictor", layout="centered")
-st.title("🎓 Student Performance Predictor")
-
-# Load dataset (pre-uploaded)
-@st.cache_data
-def load_data():
     df = pd.read_csv("cstperformance01.csv")
     return df
 
@@ -125,44 +59,5 @@ y_pred = model.predict(X_test)
 # Metrics
 rmse = np.sqrt(mean_squared_error(y_test, y_pred))
 r2 = r2_score(y_test, y_pred)
-
-st.markdown("### 📊 Model Performance")
-col1, col2 = st.columns(2)
-col1.metric("✅ RMSE", f"{rmse:.2f}")
-col2.metric("✅ R² Score", f"{r2:.2f}")
-
-# Prediction table
-st.markdown("### 🔍 Predictions vs Actual (Top 10)")
-results_df = pd.DataFrame({
-    "Actual": y_test.values,
-    "Predicted": y_pred
-}).reset_index(drop=True)
-st.dataframe(results_df.head(10).style.format({'Actual': '{:.1f}', 'Predicted': '{:.1f}'}))
-
-# Predict for a custom student
-st.markdown("### 🎯 Predict for a Custom Student")
-with st.form("predict_form"):
-    custom_input = {}
-    for col in X.columns:
-        if col in cat_cols:
-            options = list(encoders[col].classes_)
-            selected = st.selectbox(f"{col}", options)
-            custom_input[col] = encoders[col].transform([selected])[0]
-        else:
-            default_val = float(df[col].mean())
-            custom_input[col] = st.number_input(f"{col}", value=default_val)
-
-    submitted = st.form_submit_button("Predict Total Score")
-    if submitted:
-        input_df = pd.DataFrame([custom_input])
-        pred_score = model.predict(input_df)[0]
-        st.success(f"📚 Predicted Total Score: **{pred_score:.2f}**")
-
-# Footer
-st.markdown("""
-<hr style='border: 1px solid #ccc'>
-<p style='text-align: center; color: #999;'>Built with ❤️ using Streamlit</p>
-""", unsafe_allow_html=True)
-
 
 
